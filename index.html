@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <title>action nav</title>
+  <style>
+    html, body{ height: 100%;}
+    body{
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    *{
+      margin: 0;padding: 0;
+      box-sizing: border-box;
+    }
+    ul{
+      list-style-type: none;
+    }
+    a{ text-decoration: none;}
+    #gnb{
+      position: relative;
+      border: 1px solid #666;
+      width: 100px; height: 100px;
+      border: 1px solid red;
+    }
+    #gnb li{
+      position: absolute;
+      left: 0; top: 0;
+      width: 100px; height: 100px;
+      border: 1px solid #666;
+      text-align: center;
+      line-height: 100px;
+    }
+    #gnb li.center{
+      left: 0;top: 0;
+    }
+    #gnb li.top{
+      /* top: -100px; */
+      background: #999;
+      z-index: 9;
+    }
+    /*
+    #gnb li.right{
+      left: 100px;
+    }
+    #gnb li.bottom{
+      top: 100px;
+    }
+    #gnb li.left{
+      left: -100px;
+    } */
+  </style>
+</head>
+<body>
+  <nav id="gnb">
+    <ul>
+      <li class="center"><a href="#">center</a></li>
+      <li class="top"><a href="#">top</a></li>
+      <li class="right"><a href="#">right</a></li>
+      <li class="bottom"><a href="#">bottom</a></li>
+      <li class="left"><a href="#">left</a></li>
+    </ul>
+  </nav>
+
+  <script>
+    $(function(){
+      var move_xy = 120,
+          duration = 300;
+
+      $('#gnb > ul').click(function(){
+        $(this).toggleClass('on');
+
+        if($(this).hasClass('on')){
+          $(this).find('.top').stop().animate({top: -move_xy+'px'}, duration);
+          $(this).find('.right').stop().animate({left: move_xy+'px'}, duration);
+          $(this).find('.bottom').stop().animate({top: move_xy+'px'}, duration);
+          $(this).find('.left').stop().animate({left: -move_xy+'px'}, duration);
+        } else{
+          $(this).find('li').stop().animate({
+            top: 0, right: 0, bottom: 0, left: 0
+          } , duration);
+        }
+      });
+
+    });
+  </script>
+
+</body>
+</html>
